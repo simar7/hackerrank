@@ -10,6 +10,7 @@
     2                   (origLength*2 + 1)						3
     3                   (((origLength*2)+1)*2)					6
     4					((((origLength*2)+1)*2)+1)				7
+    5					(((((origLength*2)+1)*2)+1)*2)			14	
 '''
 import sys
 
@@ -24,6 +25,8 @@ def eval_height(cyclecount, growthLength):
     limiter = limiter + 1
 
     if int(cyclecount) == 0:
+       global limiter
+       limiter = 0
        return int(growthLength)
 
     elif limiter & 0x1 == True: # Odd
