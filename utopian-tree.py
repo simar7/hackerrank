@@ -15,18 +15,22 @@ import sys
 
 origLength = 1
 growthLength = 1
+limiter = 0
 
 # This method returns growth.
 def eval_height(cyclecount, growthLength):
-		
-	if int(cyclecount) == 0:
-		return int(growthLength)
-
-	elif int(cyclecount) & 0x1 == True: # Odd
-		return eval_height(int(cyclecount) - 1, growthLength * 2)
 	
-	elif int(cyclecount) & 0x1 == False: # Even
-		return eval_height(int(cyclecount) - 1, growthLength + 1)
+    global limiter 
+    limiter = limiter + 1
+
+    if int(cyclecount) == 0:
+       return int(growthLength)
+
+    elif limiter & 0x1 == True: # Odd
+	   return eval_height(int(cyclecount) - 1, growthLength * 2)
+	
+    elif limiter & 0x1 == False: # Even
+	   return eval_height(int(cyclecount) - 1, growthLength + 1)
 
 
 def main():
@@ -41,7 +45,7 @@ def main():
  for tree_cycle_count in input_array[1:]:
  	print (int(eval_height(tree_cycle_count, origLength)))
 
-
+ 
 
 if __name__ == '__main__':
     main()
